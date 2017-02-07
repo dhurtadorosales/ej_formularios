@@ -16,10 +16,10 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li{% if ruta == 'inicio' %} class="active" {% endif %}><a href="{{ path('inicio') }}">Portada</a></li>
+                        <li{% if ruta == 'inicio' %} class="active" {% endif %}><a href="{{ path('inicio') }}"><i class="fa fa-home"></i> Portada</a></li>
                         <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_grupos') }}"><i class="fa fa-users"></i> Grupos</a></li>
-                        <li><a href="#">Opción 2</a></li>
-                        <li class="dropdown">
+                        <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="#">Opción 2</a></li>
+                        <li{% if ruta == 'listar_grupos' %} class="active" {% endif %} class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Desplegable <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Grupos</a></li>
