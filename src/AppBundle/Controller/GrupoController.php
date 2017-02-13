@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Grupo;
+use AppBundle\Form\Type\GrupoType;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,9 +41,11 @@ class GrupoController extends Controller
         /** @var EntityManager $em */
         $em =$this->getDoctrine()->getManager();
 
-
+        //Reutilizamos un formulario que ya existe en GrupoType
+    $form= $this->createForm(GrupoType::class, $grupo);
         return $this->render('grupo/form.html.twig', [
-            'grupo' => $grupo
+            'grupo' => $grupo,
+            'formulario' => $form->createView()   //Le pasamos una vista del formulario, no el formulario
         ]);
     }
 

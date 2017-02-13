@@ -1,6 +1,8 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Modificar grupo {{ grupo }}</h1>
+    <h1>Modificar grupo {{ grupo.descripcion }}</h1>
+
+    {{ form(formulario) }}
 
 {% endblock %}
