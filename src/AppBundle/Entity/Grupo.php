@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -25,6 +26,8 @@ class Grupo
 
     /**
      * @ORM\Column(type="integer", unique=true)
+     * @Assert\GreaterThanOrEqual(value="10")
+     * @Assert\LessThanOrEqual(value="30")
      * @var int
      */
     private $aula;
