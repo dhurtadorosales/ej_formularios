@@ -19,18 +19,20 @@ class GrupoType extends AbstractType
                 'label' => 'Descripción del aula'
             ])
             ->add('aula', \Symfony\Component\Form\Extension\Core\Type\TextType::class) //Para que no me salga el texto numérico
-            ->add('planta', IntegerType::class)
+            ->add('planta', IntegerType::class, [
+                'required' => false
+            ])
             ->add('tutor', null, [
                 'placeholder' => '[No hay ninguno seleccionado]',
                 'expanded' => false
-            ])
-            //Ponemos aquí el botón submit aunque no es lo adecuado
-            ->add('enviar', SubmitType::class, [
+            ]);
+            //Podemos poner aquí el botón submit aunque no es lo adecuado
+            /*->add('enviar', SubmitType::class, [
                 'label' => 'Guardar los cambios',
                 'attr' => [
                     'class' => 'btn btn-success'
                 ]
-            ]);
+            ]);*/
 
     }
 

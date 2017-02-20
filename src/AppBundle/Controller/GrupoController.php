@@ -42,7 +42,12 @@ class GrupoController extends Controller
         $em =$this->getDoctrine()->getManager();
 
         //Reutilizamos un formulario que ya existe en GrupoType
-    $form= $this->createForm(GrupoType::class, $grupo);
+        $form= $this->createForm(GrupoType::class, $grupo);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em-flush();
+        }
         return $this->render('grupo/form.html.twig', [
             'grupo' => $grupo,
             'formulario' => $form->createView()   //Le pasamos una vista del formulario, no el formulario

@@ -34,6 +34,7 @@ class Grupo
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="No puede estar en blanco")
      * @var int
      */
     private $planta;
