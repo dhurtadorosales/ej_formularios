@@ -18,7 +18,7 @@
                     <ul class="nav navbar-nav">
                         <li{% if ruta == 'inicio' %} class="active" {% endif %}><a href="{{ path('inicio') }}"><i class="fa fa-home"></i> Portada</a></li>
                         <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_grupos') }}"><i class="fa fa-users"></i> Grupos</a></li>
-                        <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="#">Opción 2</a></li>
+                        <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_alumnos') }}"><i class="fa fa-child"></i> Alumnado</a></li>
                         <li{% if ruta == 'listar_grupos' %} class="active" {% endif %} class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Desplegable <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -40,6 +40,17 @@
         </nav>
     {% endblock %}
     <div class="container">
+        {% if app.session.flashBag.has('estado') %}
+            {% set mensajes = app.session.flashBag.get('estado') %}
+            {% for mensaje in mensajes %}
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ mensaje }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {% block content %}{% endblock %}
     </div>
 {% endblock %}

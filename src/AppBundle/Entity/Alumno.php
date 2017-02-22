@@ -36,7 +36,7 @@ class Alumno
     private $fechaNacimiento;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $observaciones;

@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Listado de alumnos</h1>
+    <a href="{{ path('nuevo_alumno') }}" class="btn btn-success"><i class="fa fa-plus"></i> Añadir alumno</a>
+    <table class="table table-bordered table-responsive table-striped table-hover">
+        <thead>
+        <tr>
+            <th class="col-sm-7">Alumno</th>
+            <th class="col-sm-2">Grupo</th>
+            <th class="col-sm-2">Fecha de Nacimiento</th>
+            <th class="col-sm-1"></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for alumno in alumnos %}
+                <tr>
+                    <td>{{ alumno.apellidos }}, {{ alumno.nombre }}</td>
+                    <td>{{ alumno.grupo }}</td>
+                    <td>{{ alumno.fechaNacimiento|date('Y/m/d') }}</td>
+                    <td>
+                        <a href="{{ path('modificar_alumno', {'id': alumno.id}) }}" class="btn btn-xs btn-info" title="Modificar"><i class="fa fa-pencil"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
