@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Confirmar eliminación de  {{ alumno }}</h1>
+    <input method="post" name="confirmar" action="{{ path('confirmar_borrar_alumno', {'id': alumno.id}) }}">
+        <button type="submit" name="eliminar" class="btn btn-danger"><i class="fa fa-trash"></i>Sí, quiero eliminarlo</button>
+        <a href="{{ path('listar_alumnos') }}" class="btn btn-info">No, quiero volver</a>
+    </form>
+
+{% endblock %}

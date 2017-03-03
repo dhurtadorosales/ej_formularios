@@ -19,7 +19,8 @@
                     <td>{{ alumno.grupo }}</td>
                     <td>{{ alumno.fechaNacimiento|date('Y/m/d') }}</td>
                     <td>
-                        <a href="{{ path('modificar_alumno', {'id': alumno.id}) }}" class="btn btn-xs btn-info" title="Modificar"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ path('modificar_alumno', {'id': alumno.id}) }}" class="btn btn-xs btn-info col-sm-6" title="Modificar"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ path('borrar_alumno', {'id': alumno.id}) }}" class="btn btn-xs btn-danger col-sm-6" title="Eliminar"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             {% endfor %}
