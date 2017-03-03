@@ -9,6 +9,7 @@ use AppBundle\Form\Type\GrupoType;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 class AlumnoController extends Controller
@@ -54,14 +55,56 @@ class AlumnoController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em-flush();
-            return $this->redirectToRoute('listar_alumnos');
+            try {
+                $em->flush();
+                $this->addFlash('estado', 'Cambios guardados con éxito');
+                return $this->redirectToRoute('listar_alumnos');
+            }
+            catch (Exception $e) {
+                $this->addFlash('error', 'Error');
+            }
         }
 
         return $this->render('alumno/form.html.twig', [
             'alumno' => $alumno,
             'formulario' => $form->createView()   //Le pasamos una vista del formulario, no el formulario
         ]);
+    }
+
+    /**
+     * @Route("/alumnos/eliminar/{id}", name="borrar_alumno", methods={"GET"})
+     */
+    public function borrarAction(Alumno $alumno)    //Misma ruta que el siguiente pero el método es distinto
+    {
+        /** @var EntityManager $em */
+        $em =$this->getDoctrine()->getManager();
+
+        return $this->render('alumno/borrar.html.twig', [
+            'alumno' => $alumno
+        ]);
+    }
+
+    /**
+     * @Route("/alumnos/eliminar/{id}", name="confirmar_borrar_alumno", methods={"POST"})
+     */
+    public function borrarDeVerdadAction(Alumno $alumno)
+    {
+        /** @var EntityManager $em */
+        $em =$this->getDoctrine()->getManager();
+
+        try {
+            foreach ($alumno->getPartes() as $parte) {
+                $em->remove($parte);
+            }
+            $em->remove($alumno);
+            $em->flush();
+            $this->addFlash('estado', 'Alumno eliminado con éxito');
+        }
+        catch (Exception $e) {
+            $this->addFlash('error', 'No se ha podido borrar');
+        }
+
+        return $this->redirectToRoute('listar_alumnos');
     }
 
 }
