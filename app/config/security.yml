@@ -16,6 +16,9 @@ security:
                 usuario:
                   password: pollo
                   roles: 'ROLE_USER'
+    role_hierarchy:
+      ROLE_ADMIN: [ROLE_USER, ROLE_CHUCK]
+      ROLE_USER: ROLE_VISITANTE
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:

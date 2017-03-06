@@ -8,6 +8,7 @@ use AppBundle\Form\Type\AlumnoType;
 use AppBundle\Form\Type\GrupoType;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +74,7 @@ class AlumnoController extends Controller
 
     /**
      * @Route("/alumnos/eliminar/{id}", name="borrar_alumno", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN')
      */
     public function borrarAction(Alumno $alumno)    //Misma ruta que el siguiente pero el método es distinto
     {
