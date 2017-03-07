@@ -74,7 +74,7 @@ class AlumnoController extends Controller
 
     /**
      * @Route("/alumnos/eliminar/{id}", name="borrar_alumno", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMIN')
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function borrarAction(Alumno $alumno)    //Misma ruta que el siguiente pero el método es distinto
     {
@@ -88,6 +88,7 @@ class AlumnoController extends Controller
 
     /**
      * @Route("/alumnos/eliminar/{id}", name="confirmar_borrar_alumno", methods={"POST"})
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function borrarDeVerdadAction(Alumno $alumno)
     {
