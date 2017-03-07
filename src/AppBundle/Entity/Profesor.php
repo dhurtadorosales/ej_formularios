@@ -58,6 +58,12 @@ class Profesor implements UserInterface
     private $grupos;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    private $administrador;
+
+    /**
      * Convierte el profesor en una cadena de texto
      */
     public function __toString()
@@ -313,5 +319,53 @@ class Profesor implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * Set clave
+     *
+     * @param string $clave
+     *
+     * @return Profesor
+     */
+    public function setClave($clave)
+    {
+        $this->clave = $clave;
+
+        return $this;
+    }
+
+    /**
+     * Get clave
+     *
+     * @return string
+     */
+    public function getClave()
+    {
+        return $this->clave;
+    }
+
+    /**
+     * Set administrador
+     *
+     * @param boolean $administrador
+     *
+     * @return Profesor
+     */
+    public function setAdministrador($administrador)
+    {
+        $this->administrador = $administrador;
+
+        return $this;
+    }
+
+    /**
+     * Get administrador
+     *
+     * @return boolean
+     */
+    public function getAdministrador()
+    {
+        return $this->administrador;
     }
 }

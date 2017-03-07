@@ -19,21 +19,13 @@
                         <li{% if ruta == 'inicio' %} class="active" {% endif %}><a href="{{ path('inicio') }}"><i class="fa fa-home"></i> Portada</a></li>
                         <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_grupos') }}"><i class="fa fa-users"></i> Grupos</a></li>
                         <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_alumnos') }}"><i class="fa fa-child"></i> Alumnado</a></li>
-                        <li{% if ruta == 'listar_grupos' %} class="active" {% endif %} class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Desplegable <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Grupos</a></li>
-                                <li><a href="#">Acción 2</a></li>
-                                <li><a href="#">Acción 3</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Cabecera</li>
-                                <li><a href="#">Enlace separado</a></li>
-                                <li><a href="#">Otro enlace separado</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Otra opción</a></li>
+                        {% if app.user %}
+                            <li><a href="{{ path('salir') }}">{{ app.user.dni }}  -  Salir</a></li>
+                        {% else %}
+                            <li><a href="{{ path('entrar') }}">Acceder</a></li>
+                        {% endif %}
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
