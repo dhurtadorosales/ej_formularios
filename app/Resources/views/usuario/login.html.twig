@@ -3,7 +3,7 @@
 {% block content %}
     {% if error %}
         <div class="alert alert-danger">
-            {{ error.message | trans }}
+            {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
     {% endif %}
     <form method="post" action="{{ path('comprobar') }}">

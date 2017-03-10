@@ -13,10 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Security("is_granted('ROLE_TUTOR')")
+ * @Route("/alumnos")
+ */
 class AlumnoController extends Controller
 {
     /**
-     * @Route("/alumnos", name="listar_alumnos")
+     * @Route("/", name="listar_alumnos")
      */
     public function indexAction()
     {
@@ -38,8 +42,8 @@ class AlumnoController extends Controller
     }
 
     /**
-     * @Route("/alumnos/modificar/{id}", name="modificar_alumno")
-     * @Route("/alumnos/nuevo", name="nuevo_alumno")
+     * @Route("/modificar/{id}", name="modificar_alumno")
+     * @Route("/nuevo", name="nuevo_alumno")
      */
     public function formAlumnoAction(Request $request, Alumno $alumno = null) //null es valor por defecto
     {
@@ -73,7 +77,7 @@ class AlumnoController extends Controller
     }
 
     /**
-     * @Route("/alumnos/eliminar/{id}", name="borrar_alumno", methods={"GET"})
+     * @Route("/eliminar/{id}", name="borrar_alumno", methods={"GET"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function borrarAction(Alumno $alumno)    //Misma ruta que el siguiente pero el método es distinto
@@ -87,7 +91,7 @@ class AlumnoController extends Controller
     }
 
     /**
-     * @Route("/alumnos/eliminar/{id}", name="confirmar_borrar_alumno", methods={"POST"})
+     * @Route("/eliminar/{id}", name="confirmar_borrar_alumno", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function borrarDeVerdadAction(Alumno $alumno)
