@@ -15,6 +15,7 @@ class UsuarioController extends Controller
     public function indexAction()
     {
         $helper = $this->get('security.authentication_utils');
+
         return $this->render('usuario/login.html.twig', [
             'error' => $helper->getLastAuthenticationError()
         ]);
@@ -35,7 +36,7 @@ class UsuarioController extends Controller
         $usuario = $this->getUser();
 
         $form = $this->createForm(ProfesorType::class, $usuario, [
-            'es_admin' => $this->isGranted('ROLE_ADMNI')
+            'es_admin' => $this->isGranted('ROLE_ADMNIN')
         ]);
 
         $form->handleRequest($request);
@@ -45,7 +46,8 @@ class UsuarioController extends Controller
 
             if ($claveFormulario) {
                 $clave = $this->get('security.password_encoder')
-                    ->encodePassword($usuario, $form->get('nueva')->get('first')->getData());
+                    ->encodePassword($usuario, $claveFormulario);
+
                 $usuario->setClave($clave);
             }
             $this->getDoctrine()->getManager()->flush();

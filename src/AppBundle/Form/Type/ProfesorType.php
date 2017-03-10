@@ -39,22 +39,23 @@ class ProfesorType extends AbstractType
                 ->add('antigua', PasswordType::class, [
                     'label' => 'form.clave_antigua',
                     'mapped' => false,
-                    'constrains' => [
-                        new UserPassword(), //solo valdrá  si metemos la contraseña del usuario
-                        new Length(['min' => 4])
-                    ]
-                ])
-                ->add('nueva', RepeatedType::class, [
-                    'mapped' => false,
-                    'type' => PasswordType::class,
-                    'fist_options' => [
-                        'label' => 'form.clave_neuva'
-                    ],
-                    'second_options' => [
-                        'label' => 'form.clave_nueva_repetir'
+                    'constraints' => [
+                        new UserPassword() //solo valdrá  si metemos la contraseña del usuario
                     ]
                 ]);
         }
+
+        $builder
+            ->add('nueva', RepeatedType::class, [
+                'mapped' => false,
+                'type' => PasswordType::class,
+                'first_options' => [
+                    'label' => 'form.clave_nueva'
+                ],
+                'second_options' => [
+                    'label' => 'form.clave_nueva_repetir'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -62,7 +63,8 @@ class ProfesorType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Profesor::class,
             'translation_domain' => 'profesor',
-            'es_admin' => false
+            'es_admin' => false,
+            'el_mismo' => false
         ]);
     }
 }

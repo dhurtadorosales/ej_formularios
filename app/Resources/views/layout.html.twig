@@ -18,11 +18,19 @@
                     <ul class="nav navbar-nav">
                         <li{% if ruta == 'inicio' %} class="active" {% endif %}><a href="{{ path('inicio') }}"><i class="fa fa-home"></i> Portada</a></li>
                         <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_grupos') }}"><i class="fa fa-users"></i> Grupos</a></li>
-                        <li{% if ruta == 'listar_grupos' %} class="active" {% endif %}><a href="{{ path('listar_alumnos') }}"><i class="fa fa-child"></i> Alumnado</a></li>
+                        {% if is_granted('ROLE_TUTOR') %}
+                            <li {% if ruta == 'listar_alumnos' %}
+                                    class="active"
+                                {% endif %}>
+                                <a href="{{ path('listar_alumnos') }}">
+                                    <i class="fa fa-child"></i> Alumnado
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
-                            <li><a href=""><i *************** class {{ app.user.dni }}  -  Salir</a></li>*******
+                            <li><a href="{{ path('perfil') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
                             <li><a href="{{ path('salir') }}">{{ app.user.dni }}  -  Salir</a></li>
                         {% else %}
                             <li><a href="{{ path('entrar') }}">Acceder</a></li>
